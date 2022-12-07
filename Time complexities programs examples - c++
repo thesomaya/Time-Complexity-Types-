@@ -1,0 +1,350 @@
+#include <iostream>
+#include <vector>
+#include <cstdlib>
+#include <time.h>
+using namespace std;
+int c1=0, c2=0, c3=0, c4=0, c5=0, c6=0, c7=0;
+// Binary Search Time Complexity O(log n)
+int binarySearch (int a[], int s, int e, int k)
+{
+    c1++;
+    if (s > e)
+    {
+c1++;
+return -1; }
+    int mid = (s+e)/2; c1++;
+    c1++;
+    if (a[mid] == k)
+    {
+c1++;
+return mid; }
+    c1+=2;
+    if (k > a[mid])
+        return binarySearch (a, mid+1, e, k);
+    else
+        return binarySearch (a, s, mid-1, k);
+}
+// Linear Search Time Complexity O(n)
+int linearSearch(int arr[], int n, int k)
+{
+    c2+=2;
+    for (int i = 1; i <= n; i++)
+    {   c2+=2;
+        c2++;
+        if (arr[i] == k)
+        {
+            c2++; return i;
+        }
+}
+    c2++; return -1;
+}
+// Merge Sort Time Complexity O(n log n)
+void merge(int arr[], int l, int m, int r)
+{
+    // Find sizes of two subarrays to be merged
+    int n1 = m - l + 1; c3++;
+    int n2 = r - m; c3++;
+    /* Create temp arrays */
+    int L[n1]; c3++;
+    int R[n2]; c3++;
+
+    /*Copy data to temp arrays*/
+    c3+=2;
+    for (int i = 0; i < n1; ++i)
+    {   c3+=2;
+        L[i] = arr[l + i]; c3++;
+    }
+    c3+=2;
+    for (int j = 0; j < n2; ++j)
+    {   c3+=2;
+        R[j] = arr[m + 1 + j]; c3++;
+    }
+    /* Merge the temp arrays */
+    // Initial indexes of first and second subarrays
+    int i = 0, j = 0; c3+=2;
+    // Initial index of merged subarray array
+    int k = l; c3++;
+    c3++;
+    while (i < n1 && j < n2)
+    {
+        c3++;
+        if (L[i] <= R[j])
+        {
+            arr[k] = L[i]; c3++;
+i++; c3++; }
+else
+        {
+            arr[k] = R[j]; c3++;
+            j++; c3++;
+}
+k++; c3++; }
+    /* Copy remaining elements of L[] if any */
+    c3++;
+    while (i < n1)
+    {   c3++;
+        arr[k] = L[i]; c3++;
+        i++; c3++;
+        k++; c3++;
+}
+    /* Copy remaining elements of R[] if any */
+    c3++;
+    while (j < n2)
+    {   c3++;
+        arr[k] = R[j]; c3++;
+        j++; c3++;
+        k++; c3++;
+} }
+
+void mergeSort(int arr[], int l, int r)
+{
+    c3++;
+    if (l < r)
+    {
+        // Find the middle point
+        int m = l + (r-l)/2; c3++;
+        // Sort first and second halves
+        c3++; mergeSort(arr, l, m);
+        c3++; mergeSort(arr, m + 1, r);
+        // Merge the sorted halves
+        c3++; merge(arr, l, m, r);
+    }
+}
+// Function to sum a 2-dimension array O(n^2)
+int sumArray (int a[][701], int n)
+{
+    int sum = 0; c4++;
+    c4+=2;
+    for (int i = 1; i <= n; i++)
+    {   c4+=2;
+        for (int j = 1; j <= n; j++)
+        {   c4+=2;
+            sum += a[i][j]; c4++;
+        }
+    }
+    c4++;
+    return sum;
+}
+// Function to multiply 2 matrices O(n^3)
+void mulMat(int mat1[][701], int mat2[][701], int n)
+{
+    int rslt[n+1][n+1]; c5++;
+    c5+=2;
+    for (int i = 1; i <= n; i++)
+    {
+        c5+=2;
+        for (int j = 1; j <= n; j++)
+        {
+            c5+=2;
+            rslt[i][j] = 0; c5++;
+            for (int k = 1; k <= n; k++)
+            {
+c5+=2;
+                rslt[i][j] += mat1[i][k] * mat2[k][j]; c5++;
+            }
+} }
+}
+
+//Finding all subsets time complexity O(2^n)
+void subsets(vector<int>& a,vector<vector<int> >& result,vector<int>&
+ subset,int index)
+{
+    result.push_back(subset); c6++;
+    c6+=2;
+    for (int i = index; i < a.size(); i++)
+    {
+        c6+=2;
+        subset.push_back(a[i]); c6++;
+        subsets(a, result, subset, i + 1); c6++;
+        subset.pop_back(); c6++;
+}
+    c6++; return;
+}
+// Finding all permutations of an array O(n!)
+void permute(int a[], int i, int n)
+{
+    c7++;
+    if (i == n)
+    {
+        c7+=2;
+        for (int k = 1; k <= n; k++)
+        {   c7+=2;
+            //cout<<a[k]<<" ";
+c7++; }
+        //cout << endl;
+c7++; }
+else
+{
+c7+=2;
+        for (int j = i; j <= n; j++)
+        { c7+=2;
+            swap(a[i], a[j]); c7++;
+            permute(a, i+1, n); c7++;
+            swap(a[i], a[j]); c7++;
+} }
+}
+int main () {
+    srand(time(0));
+    int n = 10000;
+int a[n+1];
+    // filling the array with sorted numbers
+    for (int i = 1; i <= n; i++)
+        a[i] = i;
+
+// the key that we are searching for
+int k = -1;
+// binary search O(log n)
+cout << "*** Binary Search ***" << endl;
+for (int n = 1000; n <= 10000; n+=1000)
+{
+    c1 = 0;
+    binarySearch (a,1,n,k);
+    cout << "For n = " << n << " Steps count = " << c1 << endl;
+}
+// Linear Search O(n)
+cout << endl << "*** Linear Search ***" << endl;
+for (int n = 1000; n <= 10000; n+=1000)
+{
+    c2 = 0;
+    linearSearch (a,n,k);
+    cout << "For n = " << n << " Steps count = " << c2 << endl;
+}
+// Merge Sort O(n log n)
+n = 10000;
+// filling the array with random numbers
+for (int i = 1; i <= n; i++)
+    a[i] = 1 + rand()%1001;
+cout << endl << "*** Merge Sort ***" << endl;
+for (int n = 1000; n <= 10000; n+=1000)
+{
+    c3 = 0;
+    mergeSort(a,1,n);
+    cout << "For n = " << n << " Steps count is " << c3 << endl;
+}
+// Two Dimension Array Sum O(n^2)
+n = 700;
+int arr[n+1][701];
+for (int i = 1; i <= n; i++)
+    for (int j = 1; j <= n; j++)
+        arr[i][j] = 1 + rand()%301;
+cout << endl << "*** Two Dimension Array Sum ***" << endl;
+for (int n = 10; n <= 700; n+=100)
+{
+    c4 = 0;
+    sumArray(arr,n);
+    cout << "For n = " << n << " Steps count: " << c4 << endl;
+}
+// Two Matrices Multiplication O(n^3)
+n = 700;
+int mat1[n+1][701];
+int mat2[n+1][701];
+
+    for (int i = 1; i <= n; i++)
+        for (int j = 1; j <= n; j++)
+        {
+            mat1[i][j] = 1 + rand()%9;
+            mat2[i][j] = 1 + rand()%9;
+        }
+    cout << endl << "*** Two Matrices Multiplication ***" << endl;
+    for (int n = 10; n <= 700; n+=100)
+    {
+        c5 = 0;
+        mulMat(mat1,mat2,n);
+        cout << "For n = " << n << " Steps count: " << c5 << endl;
+}
+    // All Subsets O(2^n)
+    vector<int> subset;
+    vector<vector<int> > result;
+    cout << endl << "*** All Subsets ***" << endl;
+    for (int n = 2; n <= 20; n+=2)
+    {
+        vector<int> v(n+1);
+        for (int i = 1; i <= n; i++)
+            v[i] = 1 + rand()%101;
+        c6 = 0;
+        subsets(v, result, subset, 1);
+        cout << "For n = " << n << " Steps count: " << c6 << endl;
+}
+    // All Permutations (n!)
+    cout << endl << "*** All Permutations ***" << endl;
+    for (int n = 1; n <= 10; n++)
+    {
+        c7 = 0;
+        permute(a, 1, n);
+        cout << "For n = " << n << " Steps count: " << c7 << endl;
+}
+return 0; }
+/*
+ *** Binary Search ***
+ For n = 1000 Steps count = 47
+ For n = 2000 Steps count = 52
+ For n = 3000 Steps count = 57
+ For n = 4000 Steps count = 57
+ For n = 5000 Steps count = 62
+ For n = 6000 Steps count = 62
+ For n = 7000 Steps count = 62
+ For n = 8000 Steps count = 62
+ For n = 9000 Steps count = 67
+ For n = 10000 Steps count = 67
+
+*** Linear Search ***
+For n = 1000 Steps count = 3003
+For n = 2000 Steps count = 6003
+For n = 3000 Steps count = 9003
+For n = 4000 Steps count = 12003
+For n = 5000 Steps count = 15003
+For n = 6000 Steps count = 18003
+For n = 7000 Steps count = 21003
+For n = 8000 Steps count = 24003
+For n = 9000 Steps count = 27003
+For n = 10000 Steps count = 30003
+*** Merge Sort ***
+For n = 1000 Steps count is 89813
+For n = 2000 Steps count is 193645
+For n = 3000 Steps count is 304309
+For n = 4000 Steps count is 415309
+For n = 5000 Steps count is 532637
+For n = 6000 Steps count is 650637
+For n = 7000 Steps count is 768637
+For n = 8000 Steps count is 886637
+For n = 9000 Steps count is 1010293
+For n = 10000 Steps count is 1135293
+*** Two Dimension Array Sum ***
+For n = 10 Steps count: 324
+For n = 110 Steps count: 36524
+For n = 210 Steps count: 132724
+For n = 310 Steps count: 288924
+For n = 410 Steps count: 505124
+For n = 510 Steps count: 781324
+For n = 610 Steps count: 1117524
+*** Two Matrices Multiplication ***
+For n = 10 Steps count: 3323
+For n = 110 Steps count: 4029523
+For n = 210 Steps count: 27915723
+For n = 310 Steps count: 89661923
+For n = 410 Steps count: 207268123
+For n = 510 Steps count: 398734323
+For n = 610 Steps count: 682060523
+*** All Subsets ***
+For n = 2 Steps count: 31
+For n = 4 Steps count: 139
+For n = 6 Steps count: 571
+For n = 8 Steps count: 2299
+For n = 10 Steps count: 9211
+For n = 12 Steps count: 36859
+For n = 14 Steps count: 147451
+For n = 16 Steps count: 589819
+For n = 18 Steps count: 2359291
+For n = 20 Steps count: 9437179
+
+*** All Permutations ***
+For n = 1 Steps count: 7
+For n = 2 Steps count: 33
+For n = 3 Steps count: 135
+For n = 4 Steps count: 635
+For n = 5 Steps count: 3563
+For n = 6 Steps count: 23571
+For n = 7 Steps count: 180155
+For n = 8 Steps count: 1562243
+For n = 9 Steps count: 15148875
+For n = 10 Steps count: 162375203
+*/
